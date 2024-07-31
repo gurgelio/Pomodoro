@@ -25,7 +25,7 @@ function HeaderLink({
 }: PropsWithChildren<ComponentProps<typeof NavLink>>) {
 	return (
 		<NavLink
-			className="size-12 flex justify-center items-center text-gray-100 border-t-[3px] border-b-[3px] border-transparent hover:border-b-emerald-500 transition-colors aria-[current]:text-emerald-500"
+			className="size-12 flex justify-center items-center text-gray-100 border-t-[3px] border-b-[3px] border-transparent hover:border-b-emerald-600 transition-colors aria-[current]:text-emerald-600"
 			{...rest}
 		>
 			{children}
