@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDom from "react-dom/client";
-import { App } from "./App.tsx";
+import { BrowserRouter } from "react-router-dom";
+import { Router } from "./Router";
 import "./tailwind.css";
 
 const root = document.getElementById("root");
@@ -10,6 +11,8 @@ if (!root) {
 
 ReactDom.createRoot(root).render(
 	<React.StrictMode>
-		<App />
+		<BrowserRouter>
+			<Router />
+		</BrowserRouter>
 	</React.StrictMode>,
 );

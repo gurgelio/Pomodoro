@@ -9,15 +9,47 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(/fonts/Roboto-Regular.ttf) format("ttf");
+    src: url(/fonts/RobotoFlex-Variable.ttf) format("ttf");
   }
 
   @font-face {
-    font-family: "Roboto";
+    font-family: "RobotoMono";
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     font-display: swap;
-    src: url(/fonts/Roboto-Bold.ttf) format("ttf");
+    src: url(/fonts/RobotoMono-Variable.ttf) format("ttf");
+  }
+
+  @font-face {
+    font-family: "RobotoMono";
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/RobotoMono-Italic-Variable.ttf) format("ttf");
+  }
+
+  body {
+    @apply bg-gray-900 text-gray-300 antialiased text-[87.5%] md:text-[100%];
+  }
+
+  strong, b {
+    @apply font-bold;
+  }
+
+  em {
+    @apply italic;
+  }
+
+  h1 {
+    @apply text-2xl;
+  }
+
+  h2 {
+    @apply text-xl;
+  }
+
+  h3 {
+    @apply text-lg;
   }
 
   :focus {
