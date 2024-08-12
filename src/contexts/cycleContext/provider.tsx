@@ -1,25 +1,11 @@
-import { type PropsWithChildren, createContext, useState } from "react";
-import type { Cycle } from "../schemas/cycle";
-
-interface CycleContextState {
-	cycle: Cycle | null;
-	cycleHistory: Cycle[];
-}
+import { type PropsWithChildren, useState } from "react";
+import { cycleContext } from ".";
+import type { Cycle } from "../../schemas/cycle";
 
 interface StartCycleData {
 	task: string;
 	totalMinutes: number;
 }
-
-interface CycleContextActions {
-	startCycle: (data: StartCycleData) => void;
-	interruptCycle: () => void;
-	finishCycle: () => void;
-}
-
-export const cycleContext = createContext(
-	{} as CycleContextState & CycleContextActions,
-);
 
 export function CycleProvider({ children }: PropsWithChildren) {
 	const [cycle, setCycle] = useState<Cycle | null>(null);
