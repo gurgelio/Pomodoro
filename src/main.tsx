@@ -2,7 +2,7 @@ import React from "react";
 import ReactDom from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { Router } from "./Router";
-import { CycleProvider } from "./contexts/cycleContext";
+import { CycleProvider } from "./contexts/cycleContext/provider";
 import "./tailwind.css";
 
 const root = document.getElementById("root");
