@@ -1,14 +1,9 @@
 import { differenceInSeconds } from "date-fns";
-import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
-import type { Cycle } from "../../../schemas/cycle";
+import { useContext, useEffect, useState } from "react";
+import { cycleContext } from "../../../contexts/cycleContext";
 
-interface ClockProps {
-	cycle: Cycle | null;
-	setCycle: Dispatch<SetStateAction<Cycle | null>>;
-	setCycleHistory: Dispatch<SetStateAction<Cycle[]>>;
-}
-
-export function Clock({ cycle, setCycleHistory, setCycle }: ClockProps) {
+export function Clock() {
+	const { cycle, finishCycle } = useContext(cycleContext);
 	const [secondsLeft, setSecondsLeft] = useState(0);
 	const seconds = (secondsLeft % 60).toString().padStart(2, "0");
 	const minutes = Math.floor(secondsLeft / 60)
@@ -29,8 +24,7 @@ export function Clock({ cycle, setCycleHistory, setCycle }: ClockProps) {
 		const interval = setInterval(() => {
 			const secondsElapsed = differenceInSeconds(new Date(), cycle.startDate);
 			if (secondsElapsed <= 0) {
-				setCycleHistory((c) => [...c, cycle]);
-				setCycle(null);
+				finishCycle();
 				clearInterval(interval);
 			}
 
@@ -38,7 +32,7 @@ export function Clock({ cycle, setCycleHistory, setCycle }: ClockProps) {
 		}, 1000);
 
 		return () => clearInterval(interval);
-	}, [cycle, setCycle, setCycleHistory]);
+	}, [cycle, finishCycle]);
 
 	useEffect(() => {
 		if (secondsLeft <= 0) {

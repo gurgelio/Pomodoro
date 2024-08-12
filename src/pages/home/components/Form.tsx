@@ -1,13 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
-import type { Dispatch, SetStateAction } from "react";
-import { type SubmitHandler, useForm } from "react-hook-form";
+import { useContext } from "react";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
-import type { Cycle } from "../../../schemas/cycle";
+import { cycleContext } from "../../../contexts/cycleContext";
 
 interface FormProps {
-	cycle: Cycle | null;
-	setCycle: Dispatch<SetStateAction<Cycle | null>>;
 	formId: string;
 }
 
@@ -23,7 +21,8 @@ const formSchema = z.object({
 
 type FormSchema = z.infer<typeof formSchema>;
 
-export function Form({ cycle, setCycle, formId }: FormProps) {
+export function Form({ formId }: FormProps) {
+	const { startCycle, cycle } = useContext(cycleContext);
 	const { register, handleSubmit, reset } = useForm<FormSchema>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -32,18 +31,14 @@ export function Form({ cycle, setCycle, formId }: FormProps) {
 		},
 	});
 
-	const createNewCycle: SubmitHandler<FormSchema> = (data) => {
-		setCycle({
-			...data,
-			id: new Date().getTime().toString(),
-			startDate: new Date(),
-		});
+	const handleNewCycle = handleSubmit((data) => {
+		startCycle(data);
 		reset();
-	};
+	});
 
 	return (
 		<form
-			onSubmit={handleSubmit(createNewCycle)}
+			onSubmit={handleNewCycle}
 			id={formId}
 			className="flex items-center justify-center gap-2 text-lg flex-wrap"
 		>
