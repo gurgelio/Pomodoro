@@ -7,15 +7,15 @@ import "./tailwind.css";
 
 const root = document.getElementById("root");
 if (!root) {
-	throw new Error("root element not found!");
+  throw new Error("root element not found!");
 }
 
 ReactDom.createRoot(root).render(
-	<React.StrictMode>
-		<BrowserRouter>
-			<CycleProvider>
-				<Router />
-			</CycleProvider>
-		</BrowserRouter>
-	</React.StrictMode>,
+  <React.StrictMode>
+    <BrowserRouter>
+      <CycleProvider>
+        <Router />
+      </CycleProvider>
+    </BrowserRouter>
+  </React.StrictMode>,
 );
